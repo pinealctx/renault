@@ -1,4 +1,4 @@
-package cmd
+package project
 
 import (
 	"fmt"
@@ -396,7 +396,7 @@ func initProject(c *cli.Context) error {
 	}
 	var fullPath = path.Join(pwd, root)
 	var exist bool
-	if exist, err = paths.Exist(fullPath); err != nil {
+	if exist, err = paths.Exists(fullPath); err != nil {
 		return fmt.Errorf("InitProject: Check path exist error: %+v", err)
 	}
 	if exist {
