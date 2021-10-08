@@ -24,7 +24,7 @@ func main() {
 		},
 	}
 	app.Commands = cli.Commands{
-		project.InitCommand,
+		project.Command,
 		workspace.Command,
 	}
 	var err = app.Run(os.Args)

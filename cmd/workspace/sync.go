@@ -21,10 +21,9 @@ const (
 )
 
 var syncCommand = &cli.Command{
-	Name:    "sync",
-	Aliases: []string{"a"},
-	Usage:   "Sync the workspace all projects.",
-	Action:  syncWorkspace,
+	Name:   "sync",
+	Usage:  "Sync the workspace all projects.",
+	Action: syncWorkspace,
 }
 
 func syncWorkspace(*cli.Context) error {
@@ -68,8 +67,9 @@ func syncWorkspace(*cli.Context) error {
 	}
 	var wg sync.WaitGroup
 	pool, err := ants.NewPoolWithFunc(poolSize, func(i interface{}) {
+		project := i.(Project)
+		syncGitProject(&project)
 		wg.Done()
-		syncGitProject(i.(*Project))
 	})
 	if err != nil {
 		return fmt.Errorf("newPoolWithFunc error: %+v", err)
@@ -77,7 +77,7 @@ func syncWorkspace(*cli.Context) error {
 	defer pool.Release()
 	for _, p := range projects {
 		wg.Add(1)
-		if err = pool.Invoke(&p); err != nil {
+		if err = pool.Invoke(p); err != nil {
 			return fmt.Errorf("invoke task error: %+v", err)
 		}
 	}
@@ -150,7 +150,7 @@ func pullProject(s *sh.Session, p *Project) error {
 	if err != nil {
 		return fmt.Errorf("git pull project error: %+v", err)
 	}
-	fmt.Printf("[%s] git pull success.", p.Name)
+	fmt.Printf("[%s] git pull success.\n", p.Name)
 	status, err = statusProject(s, p)
 	if err != nil {
 		return fmt.Errorf("status project agin error: %+v", err)
