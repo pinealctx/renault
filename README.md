@@ -5,15 +5,36 @@ Renault, useful tools.
 ## Install Renault
 
 ```shell
-go get github.com/pinealctx/renault@latest
+go get github.com/pinealctx/renault@master
 ```
 
 ## Commands 
 
-### Initialize the project structure
+### 初始化工作区
 
 ```shell
-renault init --name=github.com/pinealctx/renault
+renault workspace init
+renault w init
+```
+
+### 工作区新增新项目
+
+```shell
+renault workspace add --url=git@gl.codectn.com:hermes/user.git
+renault w add --url=git@gl.codectn.com:hermes/user.git
+```
+
+### 同步工作区并拉取最新代码
+
+```shell
+renault workspace sync
+renault w sync
+```
+
+### 初始化项目结构
+
+```shell
+renault project init --name=github.com/pinealctx/renault
 ```
 
 ## TODO
