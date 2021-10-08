@@ -5,7 +5,7 @@ Renault, useful tools.
 ## Install Renault
 
 ```shell
-go get github.com/pinealctx/renault@master
+go install github.com/pinealctx/renault@master
 ```
 
 ## Commands 

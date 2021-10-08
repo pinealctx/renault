@@ -13,7 +13,7 @@ func main() {
 	var app = cli.NewApp()
 	app.Name = "Renault"
 	app.Usage = "A useful tools."
-	app.Version = "0.0.1"
+	app.Version = "0.0.2"
 	app.Before = beforeAction
 	app.After = afterAction
 	app.Flags = []cli.Flag{
