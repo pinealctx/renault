@@ -1,4 +1,4 @@
-package cmd
+package project
 
 import (
 	"fmt"
@@ -20,7 +20,7 @@ var rootItem = Item{
 					Name: "models",
 					Children: []Item{
 						{
-							Name:     "README.md",
+							Name: "README.md",
 							Template: `# Models
 
 这个目录用于存储一些基础且需跨仓库通用的数据结构。`,
@@ -31,7 +31,7 @@ var rootItem = Item{
 					Name: "pb",
 					Children: []Item{
 						{
-							Name:     "README.md",
+							Name: "README.md",
 							Template: `# ProtoBuffer
 
 这个目录用于存储关于ProtoBuffer以及GRPC的定义。`,
@@ -42,7 +42,7 @@ var rootItem = Item{
 					Name: "sql",
 					Children: []Item{
 						{
-							Name:     "README.md",
+							Name: "README.md",
 							Template: `# SQL
 
 这个目录用于存储关于Mysql或其他数据库SQL脚本。`,
@@ -53,7 +53,7 @@ var rootItem = Item{
 					Name: "swagger",
 					Children: []Item{
 						{
-							Name:     "README.md",
+							Name: "README.md",
 							Template: `# Swagger
 
 这个目录用于存储关于Swagger(openapi)相关的接口定义。`,
@@ -80,7 +80,7 @@ var rootItem = Item{
 			Name: "configs",
 			Children: []Item{
 				{
-					Name:     "README.md",
+					Name: "README.md",
 					Template: `# Configs
 
 这个目录用于存储一些关于服务相关的配置。`,
@@ -91,7 +91,7 @@ var rootItem = Item{
 			Name: "internal",
 			Children: []Item{
 				{
-					Name:     "README.md",
+					Name: "README.md",
 					Template: `# Internal
 
 这个目录用于存储仅本仓库内会使用到而不愿意暴露给外部使用的package。`,
@@ -102,7 +102,7 @@ var rootItem = Item{
 			Name: "pkg",
 			Children: []Item{
 				{
-					Name:     "README.md",
+					Name: "README.md",
 					Template: `# Pkg
 
 这个目录用于存储一些可供外部仓库公用的package。`,
@@ -113,7 +113,7 @@ var rootItem = Item{
 			Name: "scripts",
 			Children: []Item{
 				{
-					Name:     "README.md",
+					Name: "README.md",
 					Template: `# Scripts
 
 这个目录用于存储一些脚本文件等。`,
@@ -130,7 +130,7 @@ golangci-lint run ./...`,
 			},
 		},
 		{
-			Name:     "README.md",
+			Name: "README.md",
 			Template: `# [ProjectName]
 
 This is an interesting service.`,
@@ -375,7 +375,7 @@ go 1.16
 	},
 }
 
-var InitCommand = &cli.Command{
+var initCommand = &cli.Command{
 	Name:  "init",
 	Usage: "Initialize the project structure.",
 	Flags: []cli.Flag{&cli.StringFlag{
@@ -396,7 +396,7 @@ func initProject(c *cli.Context) error {
 	}
 	var fullPath = path.Join(pwd, root)
 	var exist bool
-	if exist, err = paths.Exist(fullPath); err != nil {
+	if exist, err = paths.Exists(fullPath); err != nil {
 		return fmt.Errorf("InitProject: Check path exist error: %+v", err)
 	}
 	if exist {
